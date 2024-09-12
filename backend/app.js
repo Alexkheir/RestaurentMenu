@@ -12,6 +12,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.json());
+
 app.use('/auth', authRoutes);
 
 
@@ -21,7 +22,7 @@ console.log('Before database sync');
 
 (async () => {
   try {
-    await db.sequelize.sync({ force: false });
+    await db.sequelize.sync({ force: true });
     console.log('connected to database');
   } catch (error) {
     console.error('Failed to connect to database:', error);
