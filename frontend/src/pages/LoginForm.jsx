@@ -9,6 +9,8 @@ function LoginFormPage(){
 
 export default LoginFormPage;
 
+// ... existing code ...
+
 export const action = async ({ request }) => {
     const data = await request.formData();
     const email = data.get('email');
@@ -29,7 +31,6 @@ export const action = async ({ request }) => {
             return json({ message: 'Incorrect password' }, { status: 400 });
         }
 
-
         if (!response.ok) {
             throw json({ message: 'Could not login admin.' }, { status: 500 });
         }
@@ -37,12 +38,18 @@ export const action = async ({ request }) => {
         const res = await response.json();
         const token = res.token;
         localStorage.setItem('token', token);
+
+        // Ensure the token is removed after 30 minutes
+        console.log('Token set. It will be removed in 30 minutes.');
         setTimeout(() => {
             localStorage.removeItem('token');
-        }, 30 * 60 * 1000);
+            console.log('Token removed after 30 minutes.');
+        }, 30 * 60 * 1000); // 30 minutes in milliseconds
+
         return redirect('/admin');
     } catch (error) {
         console.error("Login failed:", error);
         throw json({ message: 'Login failed.' }, { status: 500 });
     }
 }
+
