@@ -7,6 +7,9 @@ import ViewItems from './components/adminDashboard/ViewItems';
 import AddItems from './components/adminDashboard/AddItems';
 import ViewEmployees from './components/adminDashboard/ViewEmployees';
 import AddEmployee from './components/adminDashboard/AddEmployee';
+import ViewTodaysOrders from './components/adminDashboard/ViewTodaysOrders';
+import ViewOrdersHistory from './components/adminDashboard/ViewOrdersHistory';
+
 
 
 const router = createBrowserRouter([
@@ -36,6 +39,14 @@ const router = createBrowserRouter([
       {
         path: "add-employee",
         element: <AddEmployee />,
+      },
+      {
+        path: "view-todays-orders",
+        element: <ViewTodaysOrders />,
+      },
+      {
+        path: "view-orders-history",
+        element: <ViewOrdersHistory />,
       },
     ],
   },

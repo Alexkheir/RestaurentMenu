@@ -31,8 +31,8 @@ function AddEmployee() {
                             <p><strong>Gender:</strong> {employee.gender}</p>
                             <p><strong>Email:</strong> {employee.email}</p>
                             <div className="flex space-x-2 mt-2">
-                                <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Edit</button>
-                                <button className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Delete</button>
+                                <button className="bg-yellow-400 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Edit</button>
+                                <button className="bg-yellow-400 text-white px-4 py-2 rounded-lg hover:bg-red-600">Delete</button>
                             </div>
                         </li>
                     ))}

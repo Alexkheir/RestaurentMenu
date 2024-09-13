@@ -1,7 +1,9 @@
 import { Form } from "react-router-dom";
 
+
 function AddEmployee() {
     return (
+
         <div className="flex flex-col items-start">
             <h1 className="text-2xl font-bold mb-6 text-black">Add Employee</h1>
             <Form method="post" className="w-full max-w-lg">
@@ -23,17 +25,17 @@ function AddEmployee() {
                 </div>
                 <div className="mb-4">
                     <label htmlFor="gender" className="block text-black">Gender:</label>
-                    <select id="gender" name="gender" className="w-full px-3 py-2 border rounded-lg">
-                        <option value="male">Male</option>
+                    <select id="gender" name="gender" className="w-full px-3 py-2 border rounded-lg custom-select">
+                        <option value="male" >Male</option>
                         <option value="female">Female</option>
-                        <option value="other">Other</option>
                     </select>
+
                 </div>
                 <div className="mb-4">
                     <label htmlFor="email" className="block text-black">Email:</label>
                     <input type="email" id="email" name="email" className="w-full px-3 py-2 border rounded-lg" />
                 </div>
-                <button type="submit" className="w-full bg-red-500 text-black py-2 rounded-lg hover:bg-red-600">Add Employee</button>
+                <button type="submit" className="w-full bg-yellow-500 text-black py-2 rounded-lg hover:bg-yellow-600">Add Employee</button>
             </Form>
         </div>
     );
