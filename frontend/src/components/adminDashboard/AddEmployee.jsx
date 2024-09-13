@@ -40,7 +40,3 @@ function AddEmployee() {
 }
 
 export default AddEmployee;
-function action(){
-
-    
-}
