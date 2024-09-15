@@ -9,7 +9,6 @@ body {
   font-family: 'Raleway', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(#29251c, #2c2306);
   color: #d9e2f1;
   min-height: 100vh;
 }
@@ -40,7 +39,7 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
-h1 {
+#menu h1 {
   font-family: 'Lato', sans-serif;
   font-weight: 700;
   font-size: 2rem;

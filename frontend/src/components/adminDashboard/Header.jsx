@@ -20,6 +20,7 @@ const Header = () => {
         {dropdownOpen && (
           <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-md shadow-lg">
             <a href="/profile" className="block px-4 py-2 hover:bg-gray-200">Manage Profile</a>
+            <a href="/menu" className="block px-4 py-2 hover:bg-gray-200">Check Menu</a>
             <a href="/logout" className="block px-4 py-2 hover:bg-gray-200">Logout</a>
           </div>
         )}

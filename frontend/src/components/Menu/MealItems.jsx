@@ -1,9 +1,10 @@
-import '../../menu.css';
-function MealItem({meal}) {
+import './menu.css';
+
+function MealItems({ meal }) {
     return (
         <li className="meal-item">
             <article>
-                <img src={meal.image} alt={meal.name} />
+                <img src={`http://localhost:8080/${meal.image}`} alt={meal.name} />
                 <div>
                     <h3>{meal.name}</h3>
                     <p className="meal-item-price">{meal.price}</p>
@@ -16,3 +17,5 @@ function MealItem({meal}) {
         </li>
     )
 }
+
+export default MealItems;
