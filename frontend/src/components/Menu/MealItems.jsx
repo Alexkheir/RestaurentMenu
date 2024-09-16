@@ -1,8 +1,8 @@
-import './menu.css';
+import '../Menu/menu.css';
 
-function MealItems({ meal }) {
+function MealItems({ meal, className }) {
     return (
-        <li className="meal-item">
+        <li className={`meal-item ${className}`}>
             <article>
                 <img src={`http://localhost:8080/${meal.image}`} alt={meal.name} />
                 <div>

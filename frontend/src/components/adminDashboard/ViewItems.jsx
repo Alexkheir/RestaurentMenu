@@ -1,29 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ActionButton from '../ButtonsActions/ButtonAction';
+import { useFetchItems } from '../../hooks/useGetData';
 
 function ViewItems() {
-    const [items, setItems] = useState([]);
-    const navigate = useNavigate(); // Add this line
+    const items = useFetchItems('http://localhost:8080/items/getAllItems');
+    const navigate = useNavigate(); 
 
-    useEffect(() => {
-        fetch('http://localhost:8080/items/getAllItems')
-            .then(response => response.json())
-            .then(data => setItems(data))
-            .catch(error => console.error('Error fetching items:', error));
-    }, []);
 
     async function handleDelete(Item_Id) {
-        console.log({Item_Id});
+
         try {
             const response = await fetch(`http://localhost:8080/items/deleteItem`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ id: Item_Id }) // Ensure the key matches the backend
+                body: JSON.stringify({ id: Item_Id }) 
             });
             if (response.ok) {
-                setItems(items.filter(item => item.Item_Id !== Item_Id)); // Use Item_Id here
+                setItems(items.filter(item => item.Item_Id !== Item_Id)); 
             } else {
                 console.error('Failed to delete item');
             }
@@ -33,7 +29,7 @@ function ViewItems() {
     }
 
     async function handleEdit(Item_Id) {
-        navigate(`/admin/edit-item/${Item_Id}`); // Update this line
+        navigate(`/admin/edit-item/${Item_Id}`); 
     }
 
     return (
@@ -47,8 +43,8 @@ function ViewItems() {
                         <p className="text-gray-700 mb-2">${item.price.toFixed(2)}</p>
                         <p className="text-gray-600 mb-4">{item.description}</p>
     
-                        <button onClick={() => handleEdit(item.Item_Id)} className="bg-yellow-400 text-white px-4 py-2 rounded mr-2">Edit</button>
-                        <button onClick={() => handleDelete(item.Item_Id)} className="bg-yellow-400 text-white px-4 py-2 rounded">Delete</button>
+                        <ActionButton onClick={() => handleEdit(item.Item_Id)} label="Edit" className="mr-2" />
+                        <ActionButton onClick={() => handleDelete(item.Item_Id)} label="Delete" />
                     </div>
                 ))}
             </div>

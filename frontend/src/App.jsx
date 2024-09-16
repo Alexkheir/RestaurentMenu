@@ -10,7 +10,6 @@ import AddEmployee from './components/adminDashboard/AddEmployee';
 import ViewTodaysOrders from './components/adminDashboard/ViewTodaysOrders';
 import ViewOrdersHistory from './components/adminDashboard/ViewOrdersHistory';
 import Menu from './pages/Menu';
-import {action as addItemAction} from './components/adminDashboard/AddItems';
 import EditItem from './components/adminDashboard/EditItem';
 
 
@@ -38,7 +37,6 @@ const router = createBrowserRouter([
       {
         path: "add-items",
         element: <AddItems />,
-        action: addItemAction,
       },
       {
         path: "view-employees",
