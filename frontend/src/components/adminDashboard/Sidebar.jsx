@@ -1,5 +1,15 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import SidebarItem from '../SideBarItem/SidebarItem';
+
+const Items = [
+  { to: '/admin/view-items', label: 'View Items' },
+  { to: '/admin/add-items', label: 'Add Items' },
+  { to: '/admin/view-employees', label: 'View Employees' },
+  { to: '/admin/add-employee', label: 'Add Employee' },
+  { to: '/admin/view-todays-orders', label: "Today's Orders" },
+  { to: '/admin/view-orders-history', label: 'Orders History' },
+];
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -18,36 +28,9 @@ const Sidebar = () => {
       </div>
       {isOpen && (
         <ul className="space-y-4 pt-1 mt-20">
-          <li>
-            <Link to="/admin/view-items" className="flex items-center p-2 bg-yellow-500 hover:bg-yellow-700 rounded transition-colors duration-200">
-              <span className="ml-2">View Items</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/admin/add-items" className="flex items-center p-2 bg-yellow-500 hover:bg-yellow-700 rounded transition-colors duration-200">
-              <span className="ml-2">Add Items</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/admin/view-employees" className="flex items-center p-2 bg-yellow-500 hover:bg-yellow-700 rounded transition-colors duration-200">
-              <span className="ml-2">View Employees</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/admin/add-employee" className="flex items-center p-2 bg-yellow-500 hover:bg-yellow-700 rounded transition-colors duration-200">
-              <span className="ml-2">Add Employee</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/admin/view-todays-orders" className="flex items-center p-2 bg-yellow-500 hover:bg-yellow-700 rounded transition-colors duration-200">
-              <span className="ml-2">Today's Orders</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/admin/view-orders-history" className="flex items-center p-2 bg-yellow-500 hover:bg-yellow-700 rounded transition-colors duration-200">
-              <span className="ml-2">Orders History</span>
-            </Link>
-          </li>
+          {Items.map((item, index) => (
+            <SidebarItem key={index} to={item.to} label={item.label} />
+          ))}
         </ul>
       )}
     </div>
