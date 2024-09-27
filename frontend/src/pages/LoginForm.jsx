@@ -9,7 +9,7 @@ function LoginFormPage(){
 
 export default LoginFormPage;
 
-// ... existing code ...
+
 
 export const action = async ({ request }) => {
     const data = await request.formData();
@@ -39,14 +39,23 @@ export const action = async ({ request }) => {
         const token = res.token;
         localStorage.setItem('token', token);
 
-        // Ensure the token is removed after 30 minutes
         console.log('Token set. It will be removed in 30 minutes.');
-        setTimeout(() => {
-            localStorage.removeItem('token');
-            console.log('Token removed after 30 minutes.');
-        }, 30 * 60 * 1000); // 30 minutes in milliseconds
+        const tokenExpiryTime = Date.now() + 30 * 60 * 1000;
+        localStorage.setItem('tokenExpiryTime', tokenExpiryTime);
+    
+        const intervalId = setInterval(() => {
+            const currentTime = Date.now();
+            const storedExpiryTime = localStorage.getItem('tokenExpiryTime');
+            if (currentTime >= storedExpiryTime) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('tokenExpiryTime');
+                clearInterval(intervalId);
+                console.log('Token removed after 30 minutes.');
+            }
+        }, 1000);
 
         return redirect('/admin');
+        
     } catch (error) {
         console.error("Login failed:", error);
         throw json({ message: 'Login failed.' }, { status: 500 });

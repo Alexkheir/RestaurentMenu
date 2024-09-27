@@ -1,6 +1,6 @@
-import { Outlet } from 'react-router-dom';
-import Sidebar from "../components/adminDashboard/Sidebar";
-import Header from "../components/adminDashboard/Header";
+import { Outlet , Navigate} from 'react-router-dom';
+import Sidebar from "../components/adminDashboard/sidebar/Sidebar";
+import Header from "../components/adminDashboard/header/Header";
 
 function AdminPages() {
     return (
@@ -10,6 +10,7 @@ function AdminPages() {
                 <Header />
                 <div className="mt-2 p-4">
                     <Outlet /> 
+                    <Navigate to="/admin/view-todays-orders" />
                 </div>
             </div>
         </div>

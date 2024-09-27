@@ -4,7 +4,12 @@ const path = require('path');
 const db = require('./models');
 const authRoutes = require('./routes/AuthRoutes');
 const itemsRoutes = require('./routes/ItemsRoutes');
+const orderRoutes=require('./routes/OrdersRoutes');
 const multer = require('multer');
+const employeeRoutes = require('./routes/EmployeesRoutes');
+const cors = require('cors'); 
+const auth=require('./middleware/is-auth');
+
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -23,6 +28,7 @@ const fileFilter = (req, file, cb) => {
   }
 }
 
+app.use(cors()); 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
@@ -36,20 +42,19 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use('/auth', authRoutes);
 app.use('/items', itemsRoutes);
+app.use('/employees', auth, employeeRoutes);
+app.use('/orders',  orderRoutes);
 
-console.log('Before database sync');
+
 
 (async () => {
   try {
     await db.sequelize.sync({ force: false });
-    console.log('connected to database');
   } catch (error) {
-    console.error('Failed to connect to database:', error);
   }
 })();
 
-console.log('Before app.listen');
 
 app.listen(8080, () => {
-  console.log('Server is running on port 8080');
+
 });

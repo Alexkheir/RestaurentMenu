@@ -2,6 +2,7 @@ const db = require('../models');
 const Item = db.Item;
 
 exports.addItem = async (req, res) => {
+
     //validate the request body
     const errors = {};
     if (!req.body.name) errors.name = 'Name is required';
@@ -9,6 +10,7 @@ exports.addItem = async (req, res) => {
     if (!req.body.description) errors.description = 'Description is required';
     if (!req.file) errors.image = 'Image is required';
     const { name, price, description } = req.body;
+
     const image = req.file ? req.file.path : null;
 
     const item = await Item.findOne({ where: { name } });
@@ -48,7 +50,7 @@ exports.deleteItem = async (req, res) => {
 };
 
 exports.getItem = async (req, res) => {
-    const { id } = req.body;
+    const { id } = req.query;
     try {
         const item = await Item.findOne({ where: { Item_Id: id } });
         res.status(200).json(item);

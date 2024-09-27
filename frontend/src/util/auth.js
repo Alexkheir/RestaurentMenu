@@ -2,16 +2,31 @@ import { redirect } from 'react-router-dom';
 
 export default function getAuthToken() {
     const token = localStorage.getItem('token');
-    console.log('Token:', token); // Debugging log
     return token;
 }
 
-export function loader() {
+export async function loader() {
     const token = getAuthToken();
     if (!token || token === "undefined") {
-        console.log('No token found, redirecting to home'); // Debugging log
         return redirect('/auth');
     }
-    console.log('Token found, access granted'); // Debugging log
-    return token;
+
+    try {
+        const response = await fetch('http://localhost:8080/auth/validate-token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Token validation failed');
+        }
+
+        return token;
+    } catch (error) {
+        console.error('Token validation error:', error);
+        return redirect('/auth');
+    }
 }

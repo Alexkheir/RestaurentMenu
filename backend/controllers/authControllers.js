@@ -5,6 +5,7 @@ const { v4: uuidv4 } = require('uuid');
 const Joi = require('joi'); 
 const db = require('../models');
 
+
 exports.register = async (req, res) => {
     const { email, password, username } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -14,7 +15,6 @@ exports.register = async (req, res) => {
         password: hashedPassword
     });
     res.status(201).json({ message: 'Admin registered successfully', user });
-    const { error } = schema.validate(req.body);
     if (error) return res.status(400).json({ error: error.details[0].message });
 }
 
@@ -34,11 +34,14 @@ exports.login = async (req, res) => {
         const validPassword = await bcrypt.compare(password, existingAdmin.password);
         if (!validPassword) return res.status(400).json({ error: 'Incorrect password' }); 
 
-        const token = jwt.sign({ id: existingAdmin.Admin_uuid, username: existingAdmin.username, email: existingAdmin.email }, "thiskeyissecret", { expiresIn: '1h' });
+        const token = jwt.sign({ id: existingAdmin.Admin_Id, username: existingAdmin.username, email: existingAdmin.email }, "thiskeyissecret", { expiresIn: '1h' });
 
         res.status(200).json({ token });
     } catch (error) {
         console.error("Error logging in admin:", error); 
         res.status(500).json({ error: error.message });
     }
+};
+exports.validateToken = (req, res) => {
+    res.status(200).json({ message: 'Token is valid' });
 };

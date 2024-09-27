@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        customerEmail: {
+        phoneNumber: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -30,6 +30,12 @@ module.exports = (sequelize, DataTypes) => {
         freezeTableName: true
     });
 
+    Order.associate = models => {
+        Order.hasMany(models.OrderItem, {
+            foreignKey: 'OrderId',
+            as: 'orderItems'
+        });
+    };
 
     return Order;
 };

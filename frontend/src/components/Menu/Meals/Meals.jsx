@@ -1,17 +1,20 @@
-import './menu.css';
+
+import styles from '../menu.module.css';
 import { useState, useEffect } from 'react';
 import MealItems from './MealItems'; 
-import { useFetchItems } from '../../hooks/useGetData';
+import { useFetchItems } from '../../../hooks/useGetData';
+
+
 function Meals() {
     const items = useFetchItems('http://localhost:8080/items/getAllItems');
 
     return (
-        <ul id="meals">
+        <ul className={styles.meals}>
             {items.map((item) => (
-                <MealItems key={item.id} meal={item} className="meals-style" />
+                <MealItems key={item.id} meal={item} className={styles.mealsStyle} />
             ))}
         </ul>
     )
 }
 
-export default Meals;
+export default Meals;       
